@@ -1,0 +1,31 @@
+on: [push]
+jobs:
+  checks:
+    strategy:
+      matrix:
+        check:
+          - syntax
+          - format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Install fish
+        uses: fish-actions/install-fish
+      - name: Run syntax checks
+        uses: fish-actions/${{ matrix.check }}-check
+
+  install:
+    needs:
+      - checks
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Install nori
+        uses: ./.github/actions/install-nori
+        with:
+          nori: ${{ github.repository }}@${{ github.sha }}

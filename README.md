@@ -1,6 +1,6 @@
 # 🥢 nori
 
-A highly-opinionated fisher plugin that enables automatic installation of CLI tools.
+A fisher plugin that creates aliases for automatic installation of CLI tools.
 
 ## Installation
 

@@ -1,0 +1,17 @@
+name: Check fish syntax
+description: Checks the syntax of all .fish files
+
+branding:
+  icon: check-circle
+  color: blue
+
+runs:
+  using: composite
+  steps:
+    - name: Install fish
+      uses: fish-actions/install-fish
+    - name: Install problem matcher
+      shell: bash
+      run: echo "::add-matcher::${{ github.action_path }}/fish-syntax-problem-matcher.json"
+    - name: Check fish syntax
+      uses: fish-actions/syntax-check

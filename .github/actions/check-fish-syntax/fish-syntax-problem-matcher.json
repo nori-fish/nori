@@ -1,0 +1,15 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "fish",
+      "pattern": [
+        {
+          "regexp": "^(.+)\\s+\\(line\\s+(\\d+)\\):\\s(.+)$",
+          "file": 1,
+          "line": 2,
+          "message": 5
+        }
+      ]
+    }
+  ]
+}

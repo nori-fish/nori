@@ -1,0 +1,29 @@
+name: nori-fish/install-nori
+description: Installs fish, fisher and nori
+branding:
+  icon: download
+  color: blue
+
+inputs:
+  fisher-plugins:
+    description: List of plugins to install
+    required: false
+  nori:
+    description: Fisher install path for nori
+    required: false
+    default: ${{ github.repository_owner }}/nori
+
+runs:
+  using: composite
+  steps:
+    - name: Install fish shell
+      uses: fish-actions/install-fish
+    - name: Install fisher
+      uses: fish-actions/fisher
+    - name: Install nori
+      shell: fish
+      run: fisher install ${{ inputs.nori }}
+    - name: Install plugins
+      if: ${{ inputs.fisher-plugins != "" }}
+      shell: fish {0}
+      run: nori install ${{ inputs.fisher-plugins }}
